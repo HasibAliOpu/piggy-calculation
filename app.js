@@ -1,18 +1,34 @@
 document.getElementById('calculate-btn').addEventListener('click',function(){
      const incomeInput = getInput('income-input');
-     console.log(incomeInput);
+     
      const foodInput = getInput('food-input');
-     console.log(foodInput);
+      
      const rantInput = getInput('rant-input');
-     console.log(rantInput);
+    
      const clothesInput = getInput('clothes-input');
-     console.log(clothesInput);
+
+     const totalExpenses = foodInput + rantInput + clothesInput;
+
+     const expensesTotal = document.getElementById('expenses-total');
+     const previousExpenses = parseInt(expensesTotal.innerText);
+     expensesTotal.innerText = totalExpenses;
+
+     const balanceTotal = incomeInput - expensesTotal.innerText;
+     
+     const totalBalance = document.getElementById('balance-total');
+     const previousBalance = parseInt(totalBalance.innerText);
+     totalBalance.innerText = previousBalance + balanceTotal;
      
 })
 
 function getInput(inputField) {
     const input =  document.getElementById(inputField)
+    input.value = '';
+    if(isNaN(input) || 0> input ){
+        console.log('number deya!!');
+        return alert('plzz..give a number')
+    }
     const totalIncomeText = parseInt(input.value)
-     input.value = '';
+   
     return totalIncomeText;
 }
