@@ -6,18 +6,32 @@ document.getElementById('calculate-btn').addEventListener('click',function(){
      const rantInput = getInput('rant-input');
     
      const clothesInput = getInput('clothes-input');
-
      const totalExpenses = foodInput + rantInput + clothesInput;
 
-     const expensesTotal = document.getElementById('expenses-total');
-     expensesTotal.innerText = totalExpenses;
-
-     const balanceTotal = incomeInput - expensesTotal.innerText;
+     if(isNaN(incomeInput) || incomeInput<0){
+         return alert('please...give vaild number on Income Input!')
+     }
+     if(isNaN(foodInput) || foodInput<0){
+         return alert('please...give vaild number on Food Input!')
+     }
+     if(isNaN(rantInput) || rantInput<0){
+         return alert('please...give vaild number on Rant Input!')
+     }
+     if(isNaN(clothesInput) || clothesInput<0){
+         return alert('please...give vaild number on Clothes input!')
+     }
+    if(incomeInput<totalExpenses){        
      
-     const totalBalance = document.getElementById('balance-total');
-    //  const previousBalance = parseInt(totalBalance.innerText);
-     totalBalance.innerText =  balanceTotal;
+     return alert('Your Expenses is more than your Income Amount!')
+    }
+    else{
+    const expensesTotal = document.getElementById('expenses-total');
+    expensesTotal.innerText = totalExpenses;
+    const balanceTotal = incomeInput - totalExpenses;
      
+    const totalBalance = document.getElementById('balance-total');
+    totalBalance.innerText =  balanceTotal; 
+    } 
 })
 
 document.getElementById('save-btn').addEventListener('click', function(){
@@ -34,12 +48,6 @@ document.getElementById('save-btn').addEventListener('click', function(){
 function getInput(inputField) {
     let input =  document.getElementById(inputField)
     let totalInputValue = parseInt(input.value);
-    
-    if(isNaN(totalInputValue) || totalInputValue <0){
-        console.log('number deya!!');
-        input.value = '';
-        return alert('plzz..')
-    }
     input.value = '';
     return totalInputValue;
 }
