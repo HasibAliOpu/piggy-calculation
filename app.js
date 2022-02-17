@@ -1,3 +1,4 @@
+           //////// income section \\\\\\\\\
 document.getElementById('calculate-btn').addEventListener('click',function(){
      const incomeInput = getInput('income-input');
      
@@ -7,43 +8,58 @@ document.getElementById('calculate-btn').addEventListener('click',function(){
     
      const clothesInput = getInput('clothes-input');
      const totalExpenses = foodInput + rantInput + clothesInput;
-
+    
+     ///// income input Error handle \\\\\\\\
      if(isNaN(incomeInput) || incomeInput<0){
-         return alert('please...give vaild number on Income Input!')
+         return alert('Please...give vaild number on Income Input,Thank You!!')
      }
      if(isNaN(foodInput) || foodInput<0){
-         return alert('please...give vaild number on Food Input!')
+         return alert('Please...give vaild number on Food Input,Thank You!!')
      }
      if(isNaN(rantInput) || rantInput<0){
-         return alert('please...give vaild number on Rant Input!')
+         return alert('Please...give vaild number on Rant Input,Thank You!!')
      }
      if(isNaN(clothesInput) || clothesInput<0){
-         return alert('please...give vaild number on Clothes input!')
+         return alert('Please...give vaild number on Clothes input,Thank You!!')
      }
     if(incomeInput<totalExpenses){        
      
-     return alert('Your Expenses is more than your Income Amount!')
+     return alert('Sorry...Your Expenses is more than your Income Amount!!')
     }
     else{
-    const expensesTotal = document.getElementById('expenses-total');
+    const expensesTotal = getInputValue('expenses-total');
     expensesTotal.innerText = totalExpenses;
     const balanceTotal = incomeInput - totalExpenses;
      
-    const totalBalance = document.getElementById('balance-total');
+    const totalBalance = getInputValue('balance-total');
     totalBalance.innerText =  balanceTotal; 
     } 
 })
-
+      //////// saving section \\\\\\\\
 document.getElementById('save-btn').addEventListener('click', function(){
-    const saving = document.getElementById('saving-input');
-     const totalBalance = document.getElementById('balance-total');
-    const savingAmount = document.getElementById('saving-amount');
-    const remainingBalance = document.getElementById('remaining-balance')
+    ///////// getting saving input and values \\\\\\\\
+    const saving =  getInputValue('saving-input');
+
+    const totalBalance = getInputValue('balance-total');
+
+    const savingAmount = getInputValue('saving-amount');
+
+    const remainingBalance = getInputValue('remaining-balance')
+
+    ////////// calculate Total Saving Amount \\\\\\\\\\\\\\
     const totalSaving = (totalBalance.innerText*saving.value)/100;
     savingAmount.innerText = totalSaving;
     const remainingAmount = totalBalance.innerText - savingAmount.innerText;
     remainingBalance.innerText = remainingAmount;
+    /// clean saving input field \\\
+    saving.value = '';
 })
+ ///////// get input value Function \\\\\\
+
+function getInputValue(totalAmount) {
+    return document.getElementById(totalAmount);
+}
+////////// get input field function \\\\\\\
 
 function getInput(inputField) {
     let input =  document.getElementById(inputField)
